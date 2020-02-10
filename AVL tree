@@ -1,0 +1,189 @@
+#include <iostream>
+#include <cstdlib>
+#include <time.h>
+using namespace std;
+
+void merge(int arr[], int l, int m, int r)
+{
+    int i, j, k;
+    int n1 = m - l + 1;
+    int n2 =  r - m;
+    int L[n1], R[n2];
+    for (i = 0; i < n1; i++)
+        L[i] = arr[l + i];
+    for (j = 0; j < n2; j++)
+        R[j] = arr[m + 1+ j];
+    i = 0;
+    j=0;
+    k = l;
+    while (i < n1 && j < n2)
+    {
+        if (L[i] <= R[j])
+        {
+            arr[k] = L[i];
+            i++;
+        }
+        else
+        {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+
+    while (i < n1)
+    {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+
+    while (j < n2)
+    {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+}
+
+
+void mergeSort(int arr[], int l, int r)
+{
+    if(l<r)
+    {
+        int m = l+(r-l)/2;
+        mergeSort(arr, l, m);
+        mergeSort(arr, m+1, r);
+        merge(arr, l, m, r);
+    }
+}
+
+void afisare(int arr[],int n)
+{
+    cout<<"\n";
+    for(int i=0;i<n;i++)
+        cout<<arr[i]<<" ";
+
+}
+
+int partitionare(int v[], int st, int dr)
+{
+    int pivot = v[dr];
+    int i = (st - 1);
+
+    for (int j = st; j <= dr - 1; j++) {
+        if (v[j] <= pivot) {
+
+            i++;
+            swap(v[i], v[j]);
+        }
+    }
+    swap(v[i + 1], v[dr]);
+    return (i + 1);
+}
+
+int partition_r(int v[], int st, int dr)
+{
+
+    srand(time(NULL));
+    int random = st + rand() % (dr - st);
+    swap(v[random], v[dr]);
+    return partitionare(v, st, dr);
+}
+
+void quickSort(int v[], int st, int dr)
+{
+    if (st < dr) {
+
+        int ind = partition_r(v, st, dr);
+
+
+        quickSort(v, st, ind - 1);
+        quickSort(v, ind + 1, dr);
+    }
+}
+
+
+int n=0;
+int j=1;
+
+void insheap(int ans[], int val){
+j++;
+int p=j;
+int tata;
+tata=p/2;
+if(val<=ans[tata])
+    {
+    ans[p]=val;
+}
+else{
+        while(ans[tata]<ans[p]){
+        ans[p]=ans[tata];
+        ans[tata]=val;
+        p=tata;
+        if(tata!=1){
+        tata=tata/2;}
+        else{
+            tata=tata;
+        }
+    }}
+}
+
+void asamblare(int ans[]){
+j=1;
+while(j<=n-1){
+    insheap(ans,ans[j+1]);
+}
+}
+
+
+void decapitare(int ans[])
+{ans[1]=ans[n];
+n--;
+   int p=1;
+   int aux;
+while(p*2<=n){
+        if(p*2+1>n){
+            return;
+        }
+        else{
+    aux=max(ans[p*2],ans[p*2+1]);
+    if(ans[p*2]==aux){
+        aux=ans[p];
+        ans[p]=ans[p*2];
+        ans[p*2]=aux;
+        p=p*2;
+    }
+    if(ans[p*2+1]==aux){
+         aux=ans[p];
+        ans[p]=ans[p*2+1];
+        ans[p*2+1]=aux;
+        p=p*2+1;
+    }}
+}
+}
+
+
+int main()
+{
+    int v[20]={7,10,21,8,5,4};
+    int b[20]={12,55,10,44,66,2};
+    cout<<"\n";
+    quickSort(v,1,5);
+    afisare(v,6);
+    cout<<"\n";
+    mergeSort(b,0,5);
+    afisare(b,6);
+    cout<<"\n";
+   int ans[]={-1,8,2,5,3,7,22};
+   n=sizeof(ans)/sizeof(int)-1;
+    asamblare(ans);
+    for(int i=1;i<=n;i++){
+   cout<<ans[i]<<" ";}
+   cout<<endl;
+   decapitare(ans);
+     for(int i=1;i<=n;i++){
+   cout<<ans[i]<<" ";}
+   cout<<endl;
+    return 0;
+}
