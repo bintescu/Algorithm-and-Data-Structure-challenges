@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1528796328 source:g:\(curs emag 2017)\medii\curs 6\problema 3 - plata unei sume cu numar minim de monede\main.cpp
+	<iostream>
+	<fstream>
+

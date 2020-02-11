@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1554639824 source:d:\codeblocks\temagreedy2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
+1554640822 source:c:\users\valhalla\desktop\tehnici de programare\temagreedy2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
